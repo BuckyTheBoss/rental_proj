@@ -1,5 +1,4 @@
 import os
-from posix import PRIO_PGRP
 import django
 from faker import Faker
 import random
@@ -60,6 +59,9 @@ def pop_vehicles(number):
             )
 
 
+
+if Customer.objects.count() < 40:
+    pop_customers(20)
 pop_vehicle_size()
 pop_vehicle_type()
 pop_vehicles(40)
