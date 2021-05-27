@@ -51,11 +51,12 @@ def pop_vehicle_type():
 def pop_vehicles(number):
     if Vehicle.objects.all().count() < 20:
         for _ in range(number):
-
+            random_type = random.choice(VehicleType.objects.all())
+            random_size = random.choice(VehicleSize.objects.all())
             Vehicle.objects.create(
-                vehicle_type=random.choice(VehicleType.objects.all()),
+                vehicle_type=random_type,
                 real_cost=random.randint(23,100),
-                vehicle_size=random.choice(VehicleSize.objects.all())
+                vehicle_size=random_size
             )
 
 
