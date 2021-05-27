@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Customer(models.Model):
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=40)
-    address = models.CharField(max_length=40)
-    city = models.CharField(max_length=40)
-    country  = models.CharField(max_length=40)
+    phone_number = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    country  = models.CharField(max_length=200)
 
 
 class Vehicle(models.Model):
@@ -20,11 +20,11 @@ class Vehicle(models.Model):
 
 
 class VehicleType(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=200)
 
 
 class VehicleSize(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=200)
 
 
 class Rental(models.Model):
