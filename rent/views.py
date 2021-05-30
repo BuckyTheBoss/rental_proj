@@ -17,6 +17,7 @@ class CustomerCreateView(generic.CreateView):
 
 class CustomerDetailView(generic.DetailView):
     model = Customer
+    # template_name = 'mycustomer.html'
 
 class CustomerUpdateView(generic.UpdateView):
     model = Customer
