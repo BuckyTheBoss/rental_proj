@@ -14,5 +14,11 @@ class CustomerCreateView(generic.CreateView):
     fields = '__all__'
     success_url = reverse_lazy('all_customers')
 
+
 class CustomerDetailView(generic.DetailView):
     model = Customer
+
+class CustomerUpdateView(generic.UpdateView):
+    model = Customer
+    fields = '__all__'
+    success_url = reverse_lazy('all_customers')
