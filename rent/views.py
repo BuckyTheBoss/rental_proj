@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 
 class CustomerListView(generic.ListView):
     queryset = Customer.objects.all().order_by('first_name', 'last_name')
-
+    context_object_name = 'helloworld'
 
 class CustomerCreateView(generic.CreateView):
     model = Customer

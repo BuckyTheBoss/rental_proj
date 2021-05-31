@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>Login to rental store</h1>
 
 <form method="POST">
-    {% csrf_token %}
+{% csrf_token %}
     {{ form }}
-    <button type="submit">Submit</button>
+<button>Login</button>
 </form>
-
 {% endblock %}
