@@ -10,7 +10,7 @@ class Customer(models.Model):
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     country  = models.CharField(max_length=200)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE)
 
 
 class Vehicle(models.Model):
@@ -18,7 +18,7 @@ class Vehicle(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     real_cost = models.FloatField()
     vehicle_size = models.ForeignKey('rent.VehicleSize', on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User,on_delete=models.PROTECT)
+    created_by = models.ForeignKey('accounts.Profile',on_delete=models.PROTECT)
 
 class VehicleType(models.Model):
     name = models.CharField(max_length=200)

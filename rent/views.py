@@ -3,7 +3,6 @@ from django.views import generic
 from .models import Customer, Vehicle
 from .forms import VehicleForm, VehicleFormBasic
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -44,19 +43,6 @@ class CustomerUpdateView(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy('all_customers')
 
 
-
-def signup(request):
-
-    form = UserCreationForm()
-
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    return render(request, 'registration/signup.html', {'form':form})
-
-
 @login_required
 def create_vehicle(request):
     form = VehicleFormBasic()
@@ -65,7 +51,7 @@ def create_vehicle(request):
         if form.is_valid():
             print(form.cleaned_data)
             vehicle = Vehicle.objects.create(**form.cleaned_data)
-            vehicle.created_by = request.user
+            vehicle.created_by = request.user.profile
             vehicle.save()
     
     return render(request, 'rent/create_vehicle.html', {'form':form})
