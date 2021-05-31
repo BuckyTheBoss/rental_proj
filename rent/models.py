@@ -20,12 +20,21 @@ class Vehicle(models.Model):
     vehicle_size = models.ForeignKey('rent.VehicleSize', on_delete=models.CASCADE)
     created_by = models.ForeignKey('accounts.Profile',on_delete=models.PROTECT)
 
+    def __str__(self):
+        return f'Vehicle {self.id} cost: {self.real_cost}'
+
 class VehicleType(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 
 class VehicleSize(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 
 class Rental(models.Model):

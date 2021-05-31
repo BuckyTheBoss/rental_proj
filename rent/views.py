@@ -50,8 +50,9 @@ def create_vehicle(request):
         form = VehicleFormBasic(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            vehicle = Vehicle.objects.create(**form.cleaned_data)
+            vehicle = Vehicle(**form.cleaned_data)
             vehicle.created_by = request.user.profile
             vehicle.save()
+            redirect('all_customers')
     
     return render(request, 'rent/create_vehicle.html', {'form':form})
