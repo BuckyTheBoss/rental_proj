@@ -2,10 +2,18 @@
 
 {% block content %}
 <h1>Add a vehicle</h1>
+<div class="row">
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <div class='col-3'>
+            {{field.label_tag}}
+            {{field}}
+            {{field.help_text}}
+        </div>
+
+    {% endfor %}
     <button type="submit">Submit</button>
 </form>
-
+</div>
 {% endblock %}

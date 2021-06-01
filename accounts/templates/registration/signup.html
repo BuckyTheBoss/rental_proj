@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/signup.css'%}">
+{% endblock %}
 
 {% block content %}
 <h1>Signup to rental store</h1>
 
 <form method="POST">
 {% csrf_token %}
-    {{ form }}
+    {% bootstrap_form form wrapper_class='col-6 offset-2 my-2' %}
 <button>Signup</button>
 </form>
 {% endblock %}

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rent',
-    'accounts'
+    'accounts',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 LOGIN_REDIRECT_URL = 'all_customers'
 LOGOUT_REDIRECT_URL = 'create_customer'
