@@ -19,9 +19,17 @@ class Vehicle(models.Model):
     real_cost = models.FloatField()
     vehicle_size = models.ForeignKey('rent.VehicleSize', on_delete=models.CASCADE)
     created_by = models.ForeignKey('accounts.Profile',on_delete=models.PROTECT)
+    image_link = models.URLField(null=True)
 
     def __str__(self):
         return f'Vehicle {self.id} cost: {self.real_cost}'
+
+    # def image(self):
+    #     if self.image_link:
+    #         return self.image_link
+    #     else:
+    #         return static('img/default_car.webp')
+
 
 class VehicleType(models.Model):
     name = models.CharField(max_length=200)

@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<ul>
+<div class="row">
     {% for customer in object_list %}
-        <li>{{customer.first_name}}{{customer.first_name}}</li>
+        <div class="col-4 my-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Customer: {{customer.first_name }} {{customer.last_name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{customer.email}}</h6>
+                  <p class="card-text">{{customer.address }}, {{customer.city}} {{customer.country }}</p>
+                  <a href="{% url 'customer_detail' customer.id %}" class="card-link">Card link</a>
+                </div>
+              </div>
+        </div>
     {% endfor%}
-</ul>
+</div>
 {% endblock %}

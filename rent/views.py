@@ -56,3 +56,7 @@ def create_vehicle(request):
             redirect('all_customers')
     
     return render(request, 'rent/create_vehicle.html', {'form':form})
+
+
+class VehicleDetailView(generic.DetailView):
+    model = Vehicle
