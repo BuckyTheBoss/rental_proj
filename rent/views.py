@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Customer, Vehicle
-from .forms import VehicleForm, VehicleFormBasic
+from .forms import VehicleForm, VehicleFormBasic, VehicleFormSet
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -56,6 +56,24 @@ def create_vehicle(request):
             redirect('all_customers')
     
     return render(request, 'rent/create_vehicle.html', {'form':form})
+
+
+
+@login_required
+def create_multi_vehicle(request):
+    formset = VehicleFormSet()
+    if request.method == 'POST':
+        formset = VehicleFormSet(request.POST)
+
+        if formset.is_valid():
+            for form in formset:
+                print(form.cleaned_data)
+                vehicle = Vehicle(**form.cleaned_data)
+                vehicle.created_by = request.user.profile
+                vehicle.save()
+            redirect('all_customers')
+    
+    return render(request, 'rent/multicreate_vehicle.html', {'formset':formset})
 
 
 class VehicleDetailView(generic.DetailView):

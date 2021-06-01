@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import NumberInput
 from .models import Vehicle, VehicleSize, VehicleType
-
+from django.forms import formset_factory
 
 class VehicleForm(forms.ModelForm):
     class Meta:
@@ -17,3 +17,4 @@ class VehicleFormBasic(forms.Form):
 
 
     
+VehicleFormSet = formset_factory(VehicleFormBasic, extra=3)
