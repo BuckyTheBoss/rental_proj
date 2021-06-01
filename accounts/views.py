@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Profile
 from .forms import CustomUserCreationForm
+from django.contrib import messages
 # Create your views here.
 
 def signup(request):
     if request.user.is_superuser:
+        messages.error(request, 'You are already signed up and logged in!!')
         return redirect('all_customers')
 
     form = CustomUserCreationForm()
@@ -14,5 +16,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             Profile.objects.create(user=user)
+            messages.debug(request, 'Account created successfully')
             return redirect('login')
-    return render(request, 'registration/signup.html', {'form':form})
+        else:
+            messages.error(request, 'there was a problem with your signup data, please try again')
+    return render(request, 'registration/signup.html', {'signupform':form})

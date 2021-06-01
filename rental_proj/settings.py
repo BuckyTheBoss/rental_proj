@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -132,3 +132,12 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'all_customers'
 LOGOUT_REDIRECT_URL = 'create_customer'
+
+
+MESSAGE_TAGS = {
+    messages.INFO: 'secondary',
+    messages.DEBUG: 'primary',
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+}
