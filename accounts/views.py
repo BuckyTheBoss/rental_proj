@@ -16,7 +16,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             Profile.objects.create(user=user)
-            messages.debug(request, 'Account created successfully')
+            messages.success(request, 'Account created successfully')
             return redirect('login')
         else:
             messages.error(request, 'there was a problem with your signup data, please try again')
