@@ -25,13 +25,14 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         'phone_number',
         'address',
         'city',
-        'country'
+        'country',
+        'pic'
         ]
     success_url = reverse_lazy('all_customers')
 
     def form_valid(self, form):
         customer = form.save(commit=False)
-        customer.created_by = self.request.user
+        customer.created_by = self.request.user.profile
         customer.save()
         return super().form_valid(form)
 
@@ -83,6 +84,8 @@ def create_multi_vehicle(request):
 class VehicleDetailView(DetailView):
     model = Vehicle
 
+class RentalListView(ListView):
+    model = Rental
 
 def add_rentals(request):
     formset = RentalModelFormSet()
@@ -91,6 +94,7 @@ def add_rentals(request):
 
         if formset.is_valid():
             formset.save()
+            return redirect('all_rentals')
         else:
             messages.error(request, 'Bad form info was submitted, check specifics below')
 

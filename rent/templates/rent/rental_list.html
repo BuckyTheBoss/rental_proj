@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {% for rental in object_list %}
+        <div class="col-4 my-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Customer: {{rental.rental_date }} {{customer.return_date}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{rental.customer}}</h6>
+                  <p class="card-text">{{rental.vehicle}}</p>
+                </div>
+              </div>
+        </div>
+    {% endfor%}
+</div>
+{% endblock %}

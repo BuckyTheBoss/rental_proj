@@ -1,5 +1,8 @@
+from os import stat
 from django.db import models
 from django.contrib.auth.models import User
+from django.templatetags.static import static
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -11,7 +14,16 @@ class Customer(models.Model):
     city = models.CharField(max_length=200)
     country  = models.CharField(max_length=200)
     created_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE)
+    pic = models.ImageField(upload_to='customers/', null=True)
 
+    def image(self):
+        if self.pic:
+            return self.pic.url
+        else:
+            return static('img/user_default_pic.jpg')
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 class Vehicle(models.Model):
     vehicle_type = models.ForeignKey('VehicleType', on_delete=models.CASCADE )
@@ -24,11 +36,11 @@ class Vehicle(models.Model):
     def __str__(self):
         return f'Vehicle {self.id} cost: {self.real_cost}'
 
-    # def image(self):
-    #     if self.image_link:
-    #         return self.image_link
-    #     else:
-    #         return static('img/default_car.webp')
+    def image(self):
+        if self.image_link:
+            return self.image_link
+        else:
+            return static('img/default_car.webp')
 
 
 class VehicleType(models.Model):

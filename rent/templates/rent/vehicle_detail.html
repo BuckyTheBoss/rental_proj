@@ -6,13 +6,7 @@
     <li>type {{object.vehicle_type}}</li>
     <li>size {{object.vehicle_size}}</li>
     <li>cost {{object.date_created}}</li>
-    <img src='
-        {% if object.image_link %}
-        {{object.image_link}}
-        {% else %}
-            {% static "img/default_car.webp" %}
-        {% endif %}
-    '>
+    <img src='{{ object.image }}'>
     
 </ul>
 {% endblock %}

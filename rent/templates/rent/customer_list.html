@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="row">
     {% for customer in object_list %}
         <div class="col-4 my-2">
             <div class="card" style="width: 18rem;">
+                {% if customer.pic %}
+                <img src="{{customer.pic.url}}" class="card-img-top" alt="...">
+                {% else %}
+                <img src="{% static 'img/user_default_pic.jpg'%}" class="card-img-top" alt="...">
+
+                {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">Customer: {{customer.first_name }} {{customer.last_name}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{customer.email}}</h6>
