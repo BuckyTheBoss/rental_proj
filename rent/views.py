@@ -1,18 +1,22 @@
+from django.contrib import messages
+from django.forms import formsets
 from django.shortcuts import render, redirect
-from django.views import generic
-from .models import Customer, Vehicle
-from .forms import VehicleForm, VehicleFormBasic, VehicleFormSet
+from django.views.generic import DetailView, CreateView, UpdateView, ListView
+from .models import Customer, Rental, Vehicle
+from .forms import VehicleForm, VehicleFormBasic, VehicleFormSet, RentalModelFormSet
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
+
 # Create your views here.
 
 
-class CustomerListView(generic.ListView):
+class CustomerListView(ListView):
     queryset = Customer.objects.all().order_by('first_name', 'last_name')
     context_object_name = 'helloworld'
 
-class CustomerCreateView(LoginRequiredMixin, generic.CreateView):
+class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
     fields = [
         'first_name', 
@@ -32,12 +36,12 @@ class CustomerCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class CustomerDetailView(generic.DetailView):
+class CustomerDetailView(DetailView):
     model = Customer
     # template_name = 'rent/mycustomer.html'
 
 
-class CustomerUpdateView(LoginRequiredMixin, generic.UpdateView):
+class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
     fields = '__all__'
     success_url = reverse_lazy('all_customers')
@@ -76,5 +80,19 @@ def create_multi_vehicle(request):
     return render(request, 'rent/multicreate_vehicle.html', {'formset':formset})
 
 
-class VehicleDetailView(generic.DetailView):
+class VehicleDetailView(DetailView):
     model = Vehicle
+
+
+def add_rentals(request):
+    formset = RentalModelFormSet()
+    if request.method == "POST":
+        formset = RentalModelFormSet(request.POST)
+
+        if formset.is_valid():
+            formset.save()
+        else:
+            messages.error(request, 'Bad form info was submitted, check specifics below')
+
+
+    return render(request, 'rent/add_rental.html', {'formset':formset})

@@ -1,13 +1,12 @@
 from django import forms
 from django.forms.widgets import NumberInput
-from .models import Vehicle, VehicleSize, VehicleType
-from django.forms import formset_factory
+from .models import Vehicle, VehicleSize, VehicleType, Rental
+from django.forms import formset_factory, modelformset_factory
 
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         exclude = ['created_by'] 
-
 
 
 class VehicleFormBasic(forms.Form):
@@ -18,3 +17,9 @@ class VehicleFormBasic(forms.Form):
 
     
 VehicleFormSet = formset_factory(VehicleFormBasic, extra=3)
+
+RentalModelFormSet = modelformset_factory(
+   model=Rental,
+   fields='__all__',
+   extra=1
+)

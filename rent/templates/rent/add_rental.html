@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div id="form_set">
+
+    {{formset.management_form}}
+
+    {% for form in formset %}
+
+        {{form}}
+
+    {% endfor %}
+    </div>
+    <button type="button" id="add_more">Add More</button>
+    <button type="submit">Save</button>
+
+</form>
+
+<div id="empty_form" style="display:none">
+    
+       {{formset.empty_form}}
+            
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $('#add_more').click(function() {
+	    var form_idx = $('#id_form-TOTAL_FORMS').val();
+	    $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+	    $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+</script>
+{% endblock %}
