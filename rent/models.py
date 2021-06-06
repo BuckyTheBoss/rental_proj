@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
 
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -45,9 +46,12 @@ class Vehicle(models.Model):
 
 class VehicleType(models.Model):
     name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='vehicle_types/', default='vehicle_types/default.jpg')
 
     def __str__(self):
         return self.name
+
+
 
 
 class VehicleSize(models.Model):
@@ -69,3 +73,9 @@ class RentalRate(models.Model):
     daily_rate = models.FloatField()
     vehicle_type =  models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     vehicle_size = models.ForeignKey(VehicleSize, on_delete=models.CASCADE)
+
+
+
+
+       
+

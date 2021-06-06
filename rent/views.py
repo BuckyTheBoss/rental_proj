@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.forms import formsets
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, CreateView, UpdateView, ListView
-from .models import Customer, Rental, Vehicle
+from .models import Customer, Rental, Vehicle, VehicleType
 from .forms import VehicleForm, VehicleFormBasic, VehicleFormSet, RentalModelFormSet
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -86,6 +86,15 @@ class VehicleDetailView(DetailView):
 
 class RentalListView(ListView):
     model = Rental
+
+class VehicleTypeListView(ListView):
+    model = VehicleType
+
+class VehicleTypeUpdateView(UpdateView):
+    model = VehicleType
+    fields = '__all__'
+    success_url = reverse_lazy('all_types')
+
 
 def add_rentals(request):
     formset = RentalModelFormSet()

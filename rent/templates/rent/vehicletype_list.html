@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    {% for vehicletype in object_list %}
+        <div class="col-4 my-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{vehicletype.image.url}}" class="card-img-top" alt="...">
+                
+                <div class="card-body">
+                  <h5 class="card-title">type:  {{vehicletype.name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted"></h6>
+                  <p class="card-text"></p>
+                  <a href="{% url 'type_update' vehicletype.id %}" class="card-link">Card link</a>
+                </div>
+              </div>
+        </div>
+    {% endfor%}
+</div>
+{% endblock %}
